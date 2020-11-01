@@ -34,6 +34,6 @@ container_push(
 
     # Any of these components may have variables.
     registry = "ghcr.io",
-    repository = "ghcr.io/apstndb/zetasql-local-service-docker",
-    tag = "latest",
+    repository = "apstndb/zetasql-local-service-docker",
+    tag = "v0.1.0",
 )
