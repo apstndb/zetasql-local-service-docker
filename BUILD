@@ -1,5 +1,6 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
 load("@io_bazel_rules_docker//cc:image.bzl", "cc_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
 
 cc_binary(
     name = "local_service_entrypoint",
@@ -21,7 +22,18 @@ cc_binary(
 )
 
 cc_image(
-    name = "local_service_entrypoint_image",
+    name = "local_service_image",
     base = "@cc_image_base//image",
     binary = ":local_service_entrypoint",
+)
+
+container_push(
+    name = "publish",
+    format = "Docker",
+    image = ":local_service_image",
+
+    # Any of these components may have variables.
+    registry = "ghcr.io",
+    repository = "ghcr.io/apstndb/zetasql-local-service-docker",
+    tag = "latest",
 )
