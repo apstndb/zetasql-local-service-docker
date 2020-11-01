@@ -65,6 +65,9 @@ load("@io_bazel_rules_docker//repositories:pip_repositories.bzl", "pip_deps")
 
 pip_deps()
 
-load("@io_bazel_rules_docker//cc:image.bzl", cc_image_repositories = "repositories")
+load(
+    "@io_bazel_rules_docker//cc:image.bzl",
+    _cc_image_repos = "repositories",
+)
 
-cc_image_repositories()
+_cc_image_repos()
