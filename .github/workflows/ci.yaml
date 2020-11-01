@@ -2,11 +2,17 @@ on: [push, pull_request]
 
 jobs:
   runself:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/bazel
+          key: ${{ runner.os }}-${{ hashFiles('**/WORKSPACE') }}
       - name: Setup bazelisk for Bazel builds
         uses: holvonix-open/setup-bazelisk@v0.6.0
       - run: echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-      - run: bazel build --curses=no :publish
+      - run: bazel run --curses=no --make-env=HOME=${HOME} :publish

@@ -23,7 +23,6 @@ cc_binary(
 
 cc_image(
     name = "local_service_image",
-    base = "@cc_image_base//image",
     binary = ":local_service_entrypoint",
 )
 

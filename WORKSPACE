@@ -69,17 +69,3 @@ load(
     "@io_bazel_rules_docker//container:container.bzl",
     "container_pull",
 )
-
-#container_pull(
-#    name = "cc_image_base",
-#    registry = "gcr.io",
-#    repository = "distroless/cc-debian10",
-#    tag = "latest",
-#)
-
-container_pull(
-    name = "cc_image_base",
-    registry = "index.docker.io",
-    repository = "ubuntu",
-    tag = "focal",
-)
